@@ -132,11 +132,7 @@
     <!-- Language Selection Buttons -->
     <div class="language-buttons">
         <button id="btn-en" class="active" onclick="setLanguage('en')">English</button>
-        <!-- <button id="btn-ap" onclick="setLanguage('ap')">తెలుగు</button> -->
         <button id="btn-tn" onclick="setLanguage('tn')">தமிழ்</button>
-        <!-- <button id="btn-kl" onclick="setLanguage('kl')">മലയാളം</button>
-        <button id="btn-ka" onclick="setLanguage('ka')">ಕನ್ನಡ</button> -->
-        <!-- <button id="btn-hi" onclick="setLanguage('hi')">हिंदी</button> -->
     </div>
 
     <h1 id="contactHeading">Register for Jobs</h1>
@@ -188,14 +184,22 @@
 
         const labels = {
             en: {
-                heading: "Register for Jobs",
+                heading: "Register for Happy Marriage",
                 name: "Name",
-                phone: "Phone Number"
+                phone: "Phone Number",
+                emailAddress: "Email Address",
+                caste: "Caste",
+                subCaste: "Sub Caste",
+                branch: "Branch"
             },
             tn: {  // Tamil
-                heading: "வேலைகளுக்கான பதிவு",
+                heading: "மகிழ்ச்சியான திருமணத்திற்கு பதிவு செய்யுங்கள்",
                 name: "பெயர்",
-                phone: "தொலைபேசி எண்"
+                phone: "தொலைபேசி எண்",
+                emailAddress: "மின்னஞ்சல் முகவரி",
+                caste: "சாதி",
+                subCaste: "துணை சாதி",
+                branch: "கிளை"
             }
         };
 
@@ -205,14 +209,14 @@
             document.getElementById('contactHeading').textContent = labels[language].heading;
             document.getElementById('nameLabel').textContent = labels[language].name;
             document.getElementById('phoneLabel').textContent = labels[language].phone;
+            document.getElementById('emailLabel').textContent = labels[language].emailAddress;
+            document.getElementById('casteLabel').textContent = labels[language].caste;
+            document.getElementById('subCasteLabel').textContent = labels[language].subCaste;
+            document.getElementById('branchLabel').textContent = labels[language].branch;
 
             // Update button styles
             document.getElementById('btn-en').classList.remove('active');
-            // document.getElementById('btn-ap').classList.remove('active');
-            // document.getElementById('btn-ka').classList.remove('active');
-            // document.getElementById('btn-kl').classList.remove('active');
             document.getElementById('btn-tn').classList.remove('active');
-            // document.getElementById('btn-hi').classList.remove('active');
             document.getElementById(`btn-${language}`).classList.add('active');
         }
 
@@ -248,20 +252,7 @@
             const subCaste = document.getElementById('subCaste').value;
             const branch = document.getElementById('branch').value;
 
-            console.log(name, mobileNumber, emailAddress, caste, subCaste, branch);
-
             saveToSheet(name, mobileNumber, emailAddress, caste, subCaste, branch);
-
-            // fetch('https://duuty-reg.netlify.app/.netlify/functions/send-email', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ name, mobile })
-            // }).then(data => {
-            //     console.log('Email sent successfully');
-            //     document.getElementById('contactForm').reset();
-            // }).catch(error => {
-            //     alert('Error: ' + error);
-            // });
         });
 
         // Set the default language to English on page load
