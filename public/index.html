@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrimony</title>
+    <style>
+        /* Basic reset for margins and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 150px;
+        }
+
+        .language-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .language-buttons button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .language-buttons .active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group input:focus {
+            border-color: #66afe9;
+            outline: none;
+        }
+
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .language-buttons {
+                margin-bottom: 15px;
+            }
+
+            .language-buttons button {
+                padding: 10px 14px;
+                font-size: 14px;
+                flex: 1 1 40%;
+                max-width: 100px;
+                margin: 10px 5px;
+                /* Space between rows and columns for smaller screens */
+            }
+
+            .submit-btn {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+</style>
+</head>
+
+<body>
+    <!-- Logo -->
+    <img src="./logo.png" alt="DUUTY Logo" class="logo">
+
+    <!-- Language Selection Buttons -->
+    <div class="language-buttons">
+        <button id="btn-en" class="active" onclick="setLanguage('en')">English</button>
+        <!-- <button id="btn-ap" onclick="setLanguage('ap')">తెలుగు</button> -->
+        <button id="btn-tn" onclick="setLanguage('tn')">தமிழ்</button>
+        <!-- <button id="btn-kl" onclick="setLanguage('kl')">മലയാളം</button>
+        <button id="btn-ka" onclick="setLanguage('ka')">ಕನ್ನಡ</button> -->
+        <!-- <button id="btn-hi" onclick="setLanguage('hi')">हिंदी</button> -->
+    </div>
+
+    <h1 id="contactHeading">Register for Jobs</h1>
+    <div class="contact-form">
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name" id="nameLabel">Name</label>
+                <input type="text" id="name" name="name" required>
+                <p id="nameError" class="error-message"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="mobileNumber" id="phoneLabel">Phone Number</label>
+                <input type="tel" id="mobileNumber" name="mobileNumber" required>
+                <p id="phoneError" class="error-message"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="emailAddress" id="emailLabel">Email Address</label>
+                <input type="email" id="emailAddress" name="emailAddress" required>
+                <p id="emailError" class="error-message"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="caste" id="casteLabel">Caste</label>
+                <input type="text" id="caste" name="caste" required>
+                <p id="casteError" class="error-message"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="subCaste" id="subCasteLabel">Sub Caste</label>
+                <input type="text" id="subCaste" name="subCaste" required>
+                <p id="subCasteError" class="error-message"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="branch" id="branchLabel">Branch</label>
+                <input type="text" id="branch" name="branch" required>
+                <p id="branchError" class="error-message"></p>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Set default language to English
+        let currentLanguage = 'en';
+
+        const labels = {
+            en: {
+                heading: "Register for Jobs",
+                name: "Name",
+                phone: "Phone Number"
+            },
+            tn: {  // Tamil
+                heading: "வேலைகளுக்கான பதிவு",
+                name: "பெயர்",
+                phone: "தொலைபேசி எண்"
+            }
+        };
+
+        // Function to change the language
+        function setLanguage(language) {
+            currentLanguage = language;
+            document.getElementById('contactHeading').textContent = labels[language].heading;
+            document.getElementById('nameLabel').textContent = labels[language].name;
+            document.getElementById('phoneLabel').textContent = labels[language].phone;
+
+            // Update button styles
+            document.getElementById('btn-en').classList.remove('active');
+            // document.getElementById('btn-ap').classList.remove('active');
+            // document.getElementById('btn-ka').classList.remove('active');
+            // document.getElementById('btn-kl').classList.remove('active');
+            document.getElementById('btn-tn').classList.remove('active');
+            // document.getElementById('btn-hi').classList.remove('active');
+            document.getElementById(`btn-${language}`).classList.add('active');
+        }
+
+        function saveToSheet(name, mobileNumber, emailAddress, caste, subCaste, branch) {
+            const url = "https://script.google.com/macros/s/AKfycbwlNxxZCsp8G-zFVmhFJb8rH1dG55gfAtvtMwgsxrjpdRB6ZfYzVuSuW4wQIFebr99mOg/exec"
+
+            // Submit form data to Google Sheets
+            fetch(url, {
+                method: 'POST',
+                mode: 'no-cors', // Disable CORS
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, mobileNumber, emailAddress, caste, subCaste, branch })
+            }).then(() => {
+                // Can't check response in no-cors mode
+                alert('Form submitted successfully!');
+                document.getElementById('contactForm').reset();
+            })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const mobileNumber = document.getElementById('mobileNumber').value;
+            const emailAddress = document.getElementById('emailAddress').value;
+            const caste = document.getElementById('caste').value;
+            const subCaste = document.getElementById('subCaste').value;
+            const branch = document.getElementById('branch').value;
+
+            console.log(name, mobileNumber, emailAddress, caste, subCaste, branch);
+
+            saveToSheet(name, mobileNumber, emailAddress, caste, subCaste, branch);
+
+            // fetch('https://duuty-reg.netlify.app/.netlify/functions/send-email', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ name, mobile })
+            // }).then(data => {
+            //     console.log('Email sent successfully');
+            //     document.getElementById('contactForm').reset();
+            // }).catch(error => {
+            //     alert('Error: ' + error);
+            // });
+        });
+
+        // Set the default language to English on page load
+        setLanguage('en');
+    </script>
+</body>
+
+</html>
